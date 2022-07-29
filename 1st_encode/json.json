@@ -1,0 +1,273 @@
+{
+  "height": 1080,
+  "width": 1080,
+  "elements": [
+    {
+      "type": "path",
+      "data": {
+        "operations": [
+          {
+            "type": "line",
+            "data": {
+              "target": {
+                "x": 15,
+                "y": 20
+              }
+            }
+          },
+          {
+            "type": "curve",
+            "data": {
+              "target": {
+                "x": 18,
+                "y": 21
+              },
+              "control": {
+                "start": {
+                  "x": 17,
+                  "y": 22
+                },
+                "end": {
+                  "x": 20,
+                  "y": 23
+                }
+              }
+            }
+          },
+          {
+            "type": "curve-smooth",
+            "data": {
+              "target": {
+                "x": 18,
+                "y": 21
+              },
+              "control": {
+                "x": 18,
+                "y": 21
+              }
+            }
+          },
+          {
+            "type": "quadratic",
+            "data": {
+              "target": {
+                "x": 18,
+                "y": 21
+              },
+              "control": {
+                "x": 18,
+                "y": 21
+              }
+            }
+          },
+          {
+            "type": "quadratic-smooth",
+            "data": {
+              "target": {
+                "x": 18,
+                "y": 21
+              }
+            }
+          },
+          {
+            "type": "arc",
+            "data": {
+              "circle": true,
+              "center": {
+                "x": 18,
+                "y": 21
+              },
+              "radius": 5,
+              "angle": 6000
+            }
+          },
+          {
+            "type": "arc",
+            "data": {
+              "circle": false,
+              "center": {
+                "x": 18,
+                "y": 21
+              },
+              "axis-length": {
+                "x": 4,
+                "y": 6
+              },
+              "angle": 6000
+            }
+          },
+          {
+            "type": "zeal"
+          }
+        ]
+      }
+    },
+    {
+      "type": "polygon",
+      "data": {
+        "points": [
+          {
+            "x": 10,
+            "y": 20
+          },
+          {
+            "x": 10,
+            "y": 20
+          },
+          {
+            "x": 10,
+            "y": 20
+          },
+          {
+            "x": 10,
+            "y": 20
+          },
+          {
+            "x": 10,
+            "y": 20
+          }
+        ]
+      }
+    },
+    {
+      "type": "round",
+      "data": {
+        "circle": true,
+        "radius": 5,
+        "angle": 6000
+      }
+    },
+    {
+      "type": "round",
+      "data": {
+        "circle": false,
+        "axis-length": {
+          "x": 4,
+          "y": 6
+        },
+        "angle": 6000
+      }
+    },
+    {
+      "type": "group",
+      "members": [
+        {
+          "of-map": true,
+          "id": 2
+        },
+        {
+          "of-map": false,
+          "id": 1
+        }
+      ]
+    }
+  ],
+  "map": [
+    {
+      "element": 1,
+      "position": {
+        "x": 18,
+        "y": 21
+      },
+      "level": 1,
+      "attached": [
+        {
+          "type": "rotate",
+          "data": {
+            "angle": 6000
+          }
+        },
+        {
+          "type": "zoom",
+          "data": {
+            "zoom": 1.0
+          }
+        },
+        {
+          "type": "flip"
+        },
+        {
+          "type": "shadow",
+          "data": {}
+        }
+      ]
+    },
+    {
+      "element": 2,
+      "position": {
+        "x": 18,
+        "y": 21
+      },
+      "level": 1,
+      "attached": []
+    }
+  ],
+  "iterate": [
+    {
+      "element-group": false,
+      "target": 2,
+      "times": 5,
+      "operations": [
+        {
+          "type": "move",
+          "data": {
+            "dx": 5,
+            "dy": 6
+          }
+        },
+        {
+          "type": "rotate",
+          "data": {
+            "center": {
+              "dx": 0,
+              "dy": 0
+            },
+            "dθ": 6000
+          }
+        },
+        {
+          "type": "zoom",
+          "data": {
+            "zoom": 1.5
+          }
+        },
+        {
+          "type": "flip"
+        }
+      ]
+    },
+    {
+      "element-group": true,
+      "target": 5,
+      "times": 5,
+      "operations": [
+        {
+          "type": "move",
+          "data": {
+            "dx": 5,
+            "dy": 6
+          }
+        },
+        {
+          "type": "rotate",
+          "data": {
+            "center": {
+              "dx": 0,
+              "dy": 0
+            },
+            "dθ": 6000
+          }
+        },
+        {
+          "type": "zoom",
+          "data": {
+            "zoom": 1.5
+          }
+        },
+        {
+          "type": "flip"
+        }
+      ]
+    }
+  ]
+}
