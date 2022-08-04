@@ -1,25 +1,26 @@
 # 整体结构总览
 > 注：所有x、y坐标都为有符号整数，实际处理时需要除以1000变回小数
 
-| 说明                           | 位数 | 备注                                           |
-| ------------------------------ | ---- | ---------------------------------------------- |
-| 图像宽度 width                 | 16   | 实际位数+11记为W                               |
-| 图像高度 height                | 16   | 实际位数+11记为H                               |
-| elements列表长度               | 16   | 标记了该图像上的所有元素原型                   |
-| > 元素种类 type                | 4    |                                                |
-| > 元素信息 data                |      | 详见[elements](#elements)                      |
-| map列表长度                    | 16   | 标记了该图像上所有元素原型在图像中的信息       |
-| > 元素id element               | 16   |                                                |
-| > 坐标 position                | 0    |                                                |
-| >> x坐标                       | W    |                                                |
-| >> y坐标                       | H    |                                                |
-| > 所处层数 level               | 16   | 从0x00FF开始递增，置入底层操作直接移到当前最下 |
-| > 附加信息 attached 列表长度   | 8    | 详见[map-attached](#map-attached)              |
-| iterate列表长度                | 16   | 标记该图像中应用迭代函数系统的信息             |
-| > 是否为元素组 element-group   | 1    | 若为1，则在elements中寻找组的原始map信息       |
-| > 原始元素mapId target         | 16   |                                                |
-| > 迭代次数 times               | 32   |                                                |
-| > 迭代操作 operations 列表长度 | 8    | 详见[iterate-operations](#iterate-operations)  |
+| 说明                             | 位数 | 备注                                           |
+| -------------------------------- | ---- | ---------------------------------------------- |
+| 图像宽度 width                   | 16   | 实际位数+11记为W                               |
+| 图像高度 height                  | 16   | 实际位数+11记为H                               |
+| elements列表长度                 | 16   | 标记了该图像上的所有元素原型                   |
+| > 元素种类 type                  | 4    |                                                |
+| > 元素信息 data                  |      | 详见[elements](#elements)                      |
+| map列表长度                      | 16   | 标记了该图像上所有元素原型在图像中的信息       |
+| > 元素id element                 | 16   |                                                |
+| > 坐标 position                  | 0    |                                                |
+| >> x坐标                         | W    |                                                |
+| >> y坐标                         | H    |                                                |
+| > 所处层数 level                 | 16   | 从0x00FF开始递增，置入底层操作直接移到当前最下 |
+| > 附加信息 attached 列表长度     | 8    | 详见[map-attached](#map-attached)              |
+| iterate列表长度                  | 16   | 标记该图像中应用迭代函数系统的信息             |
+| > 是否为元素组 element-group     | 1    | 若为1，则在elements中寻找组的原始map信息       |
+| > 原始元素mapId target           | 16   |                                                |
+| > 迭代次数 times                 | 32   |                                                |
+| > 单次迭代孩子 children 列表长度 | 8    | 其中每个operations列表代表一个孩子             |
+| >> 迭代操作 operations 列表长度  | 8    | 详见[iterate-operations](#iterate-operations)  |
 
 # elements
 ## type

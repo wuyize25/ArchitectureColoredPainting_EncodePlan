@@ -240,33 +240,63 @@
       "element-group": true,
       "target": 5,
       "times": 5,
-      "operations": [
-        {
-          "type": "move",
-          "data": {
-            "dx": 5,
-            "dy": 6
+      "children": [
+        [
+          {
+            "type": "move",
+            "data": {
+              "dx": 5,
+              "dy": 6
+            }
+          },
+          {
+            "type": "rotate",
+            "data": {
+              "center": {
+                "dx": 0,
+                "dy": 0
+              },
+              "dθ": 6000
+            }
+          },
+          {
+            "type": "zoom",
+            "data": {
+              "zoom": 1.5
+            }
+          },
+          {
+            "type": "flip"
           }
-        },
-        {
-          "type": "rotate",
-          "data": {
-            "center": {
-              "dx": 0,
-              "dy": 0
-            },
-            "dθ": 6000
+        ],
+        [
+          {
+            "type": "move",
+            "data": {
+              "dx": 5,
+              "dy": 6
+            }
+          },
+          {
+            "type": "rotate",
+            "data": {
+              "center": {
+                "dx": 0,
+                "dy": 0
+              },
+              "dθ": 6000
+            }
+          },
+          {
+            "type": "zoom",
+            "data": {
+              "zoom": 1.5
+            }
+          },
+          {
+            "type": "flip"
           }
-        },
-        {
-          "type": "zoom",
-          "data": {
-            "zoom": 1.5
-          }
-        },
-        {
-          "type": "flip"
-        }
+        ]
       ]
     }
   ]
