@@ -10,6 +10,8 @@
 
 3. 根据基础色、世界坐标、法线、金属度和粗糙度gbuffer，以及光源计算光照。
 
+![image-20220809141906110](2st_encode.assets/gbuffers.png)
+
 后续计划实现shadow mapping。
 
 ## 计算彩绘纹理流程
