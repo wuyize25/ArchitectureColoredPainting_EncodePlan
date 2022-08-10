@@ -30,110 +30,111 @@ compute shader接收的6个buffer：
 layout(std430, binding = 1) buffer paintingOffsetBuffer
 {
 	/**********************
-	** @[0] paintingBvhRoot
-	** @[1] paintingBvhLength
+	** @x paintingBvhRoot
+	** @y paintingBvhLength
 	**********************/
-	uint paintingOffsets[][2];
+	uvec2 paintingOffsets[];
 };
+
 layout(std430, binding = 2) buffer bvhBuffer
 {
-	uvec2 bvhChildren[];
+    uvec2 bvhChildren[];
 };
 layout(std430, binding = 3) buffer bvhBoundBuffer
 {
-	vec4 bvhBound[];
+    vec4 bvhBound[];
 };
 layout(std430, binding = 4) buffer elementOffsetBuffer
 {
-	/**********************
-	** @x elementBvhRoot
-	** @y elementBvhLength
-	** @z pointsOffset
-	** @w linesOffset
-	**********************/
-	uvec4 elementOffsets[];
+    /**********************
+    ** @[0] elementBvhRoot
+    ** @[1] elementBvhLength
+    ** @[2] pointsOffset
+    ** @[3] linesOffset
+    ** @[4] contoursOffset
+    **********************/
+    uint elementOffset[][5];
 };
 layout(std430, binding = 5) buffer elementIndexBuffer
 {
-	uint elementIndex[]; //线和面
+    uint elementIndexs[]; //线和面
 };
 layout(std430, binding = 6) buffer elementDataBuffer
 {
-	float elementData[]; //点和Style
+    float elementData[]; //点和Style
 };
 ```
 
 提供工具类合并多张彩绘的buffer，一张彩绘的参数示例：
 
 ```c++
-		GLuint paintingBvhLength = 7;
-		GLuint bvhChildren[] = {
+		std::vector<GLuint> bvhChildren = {
 			//root
-			1,2, 
+			1,2,
 			3,4, 5,6,
-			7,0, 7,30./360* 4294967296 /*右儿子用来表示旋转角度*/, 8,0, 7,0,
+			7,0, 7,GLuint(30. / 360 * 65536 + 1 * 65536) /*右儿子用来表示旋转角度和zIndex*/, 8,0, 7,0,
 			//elememt0
 			1,2,
-			5+0/*contour索引*/,5+12/*style索引，在elementData中位置*/, 3,4,
-					   5+2,5+12, 5+1,5+12,
+			5 + 0/*contour索引*/,5 + 12/*style索引，在elementData中位置*/, 3,4,
+			5 + 2,5 + 12, 5 + 1,5 + 12,
 			//elememt1
-			1+0/*line索引，element中第几条*/,1 + 25
+			1 + 0/*line索引，element中第几条*/,1 + 25
 
 		};
-		QVector4D bvhBound[] = { 
+		std::vector<QVector4D> bvhBounds = {
 			//root
 			QVector4D(-1,-1,1,1),
-			QVector4D(-0.9,-0.9,-0.1,0.9),  QVector4D(0.1, -0.9,0.9,0.9), 
+			QVector4D(-0.9,-0.9,-0.1,0.9),  QVector4D(0.1, -0.9,0.9,0.9),
 			QVector4D(-0.8,-0.8,-0.2,-0.1),  QVector4D(-0.7,0.2,-0.2,0.7), QVector4D(0.2,-0.8,0.8,-0.1), QVector4D(0.2,0.1,0.8,0.8),
 			//elememt0
 			QVector4D(-1,-1,1,1),
 			QVector4D(-1,-0.5,1,1),	QVector4D(-1,-1,1,0.5),
 									QVector4D(-1,-1,1,-0.5), QVector4D(-1,-0.5,1,0.5),
-			//elememt1
-			QVector4D(-1,0,1,1),
+									//elememt1
+									QVector4D(-1,0,1,1),
 		};
 
-		GLuint elementOffset[] = {
+		std::vector<GLuint> elementOffset = {
 			//element0
 			7, //elementBvhRoot
 			5, //elementBvhLength
 			0, //pointsOffset
 			0, //linesOffset
+			28, //contoursOffset
 			//element1
 			12, //elementBvhRoot
 			1, //elementBvhLength
 			19, //pointsOffset
 			40, //linesOffset
+			44  //contoursOffset
 		};
 
-		GLuint elementIndex[] = {
+		std::vector<GLuint> elementIndex = {
 			//element0
 			//lines, 全部当作三阶贝塞尔, 每条线四个点索引
-			0,2,2,4,
+			4,2,2,0,
 			0,0,1,1,
 			1,1,4,4,
 			1,1,5,5,
 			4,4,5,5,
 			1,1,3,3,
 			3,3,5,5,
-			//contours, 每个轮廓三个线索引
+			//contours, 每个轮廓三个线索引，若轮廓由两条线构成则第一第二元素相同
 			0,1,2,
 			2,3,4,
 			3,5,6,
-
 			//element2
 			//lines
 			0,1,2
 		};
 
-
-		GLfloat elementData[] = {
+		std::vector<GLfloat> elementData = {
 			//element0
 			//points
 			-1,0.5, -1,-0.5, 0,1, 0,-1, 1,0.5, 1,-0.5,
 			//fillStyle
 			//fill
-			0, 
+			0,
 			//fillType
 			0, //单色
 			//fillColorMetallicRoughness
